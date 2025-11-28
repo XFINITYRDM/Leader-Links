@@ -23,6 +23,11 @@
                         slate: {
                             850: '#1e293b',
                             900: '#0f172a', 
+                        },
+                        // Xfinity Purple Custom Colors
+                        xfinity: {
+                            DEFAULT: '#612579', // Deep Purple for Light Mode
+                            light: '#C388D6',   // Lighter Lavender for Dark Mode readability
                         }
                     }
                 }
@@ -127,7 +132,7 @@
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
                 <div>
                     <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-3">
-                        Executive Tools
+                        Tools
                     </h1>
                     <p class="text-lg text-slate-500 dark:text-slate-400">Access your mission-critical platforms.</p>
                 </div>
@@ -339,7 +344,7 @@
                         </div>
                     </div>
                     <div>
-                        <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">${item.name}</h4>
+                        <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-1 group-hover:text-xfinity dark:group-hover:text-xfinity-light transition-colors">${item.name}</h4>
                         <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">${item.desc}</p>
                     </div>
                 </a>
@@ -381,7 +386,7 @@
                 // Wrapper div for category filtering
                 html += `
                 <div class="tool-category-section">
-                    <div class="mb-6 border-b border-slate-100 dark:border-slate-800 pb-2">
+                    <div class="mb-6 border-b border-slate-100 dark:border-slate-800 pb-2 text-left">
                         <h3 class="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">${section.category}</h3>
                     </div>
                     <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
@@ -411,7 +416,7 @@
             let html = '';
             data.forEach(person => {
                 const initial = person.name.charAt(0);
-                const emailHtml = person.email !== '-' ? `<a href="mailto:${person.email}" class="flex items-center hover:text-blue-600 dark:hover:text-blue-400"><i data-lucide="mail" class="w-4 h-4 mr-2"></i>${person.email}</a>` : '';
+                const emailHtml = person.email !== '-' ? `<a href="mailto:${person.email}" class="flex items-center hover:text-xfinity dark:hover:text-xfinity-light"><i data-lucide="mail" class="w-4 h-4 mr-2"></i>${person.email}</a>` : '';
                 
                 html += `
                 <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
@@ -436,14 +441,14 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
                         <div class="flex flex-col space-y-1">
                             ${emailHtml}
-                            <a href="tel:${person.phone}" class="flex items-center hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                            <a href="tel:${person.phone}" class="flex items-center hover:text-xfinity dark:hover:text-xfinity-light transition-colors">
                                 <i data-lucide="phone" class="w-4 h-4 mr-2"></i>
                                 ${person.phone}
                             </a>
                         </div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <button onclick="copyPhone('${person.phone}', this)" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-400 hover:text-blue-600 transition-colors" title="Copy Phone Number">
+                        <button onclick="copyPhone('${person.phone}', this)" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-400 hover:text-xfinity dark:hover:text-xfinity-light transition-colors" title="Copy Phone Number">
                             <i data-lucide="copy" class="w-5 h-5"></i>
                         </button>
                     </td>
