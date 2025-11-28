@@ -222,53 +222,45 @@
         // --- STATE MANAGEMENT ---
         let favorites = JSON.parse(localStorage.getItem('leaderHubFavorites')) || [];
 
-        // Custom SVGs for special requests
-        // Bad Debt: Increased font size from 20 to 28 for "larger" look
+        // --- CUSTOM SVG ICONS ---
+        // These are manually defined SVGs for tools that need specific branding or custom visuals.
+
         const badDebtIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 40 24" fill="none" class="text-white dark:text-black"><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-weight="900" font-size="28" fill="currentColor" stroke="none">-$</text></svg>`;
         
         const retail360Icon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 40 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white dark:text-black"><text x="2" y="18" font-family="sans-serif" font-weight="900" font-size="18" fill="currentColor" stroke="none" style="letter-spacing:-1px">360</text><path d="M2 20 Q 20 24 38 18" stroke="currentColor" stroke-width="2" fill="none" /></svg>`;
 
-        // Updated ECM Icon (Black/White dynamic)
         const ecmIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 40 24" fill="none" class="text-white dark:text-black"><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-weight="900" font-size="20" fill="currentColor" stroke="none" style="letter-spacing:-1px">ecm</text></svg>`;
 
-        // Updated IQ Icon (Small i, Big Q)
         const iqIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 32 24" fill="none" class="text-white dark:text-black"><text x="6" y="16" font-family="sans-serif" font-weight="bold" font-size="14" fill="currentColor" stroke="none">i</text><text x="11" y="18" font-family="sans-serif" font-weight="900" font-size="20" fill="currentColor" stroke="none">Q</text></svg>`;
 
-        // Updated Seasonal Icon (Snowflake only)
         const seasonalIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white dark:text-black"><path d="M2 12h20"/><path d="M12 2v20"/><path d="m20 20-8-8-8 8"/><path d="m4 4 8 8 8-8"/></svg>`;
 
-        // Updated Xchange Icon (Extended bottom-right leg)
         const xchangeIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-white dark:text-black"><path d="m18 6-12 12"/><path d="m6 6 16 16"/></svg>`;
 
-        // Updated Hub2U Icon (Text '2U')
         const hub2uIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 40 24" fill="none" class="text-white dark:text-black"><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-weight="900" font-size="20" fill="currentColor" stroke="none" style="letter-spacing:-1px">2U</text></svg>`;
 
-        // Updated Celestial Icon (Storefront)
         const celestialIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white dark:text-black"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2v0a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12v0a2 2 0 0 1-2-2V7"/></svg>`;
 
-        // Updated Road to Awesome Icon (Road with dotted line)
         const roadIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white dark:text-black"><path d="M4 19 L8 5"/><path d="M20 19 L16 5"/><line x1="12" y1="5" x2="12" y2="19" stroke-dasharray="4 2"/></svg>`;
 
-        // Updated Key Icon (Simple Key)
         const keyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white dark:text-black"><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/><circle cx="7.5" cy="15.5" r="5.5"/></svg>`;
 
-        // Updated Test Tube Icon
         const testTubeIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white dark:text-black"><path d="M14.5 2v17.5c0 1.4-1.1 2.5-2.5 2.5h0c-1.4 0-2.5-1.1-2.5-2.5V2"/><path d="M8.5 2h7"/><path d="M14.5 16h-5"/></svg>`;
 
-        // Updated TV with Antenna Icon
-        const tvIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white dark:text-black"><rect width="20" height="15" x="2" y="7" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>`;
-
-        // Updated Exclamation Point Icon (Bold)
         const exclamationIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-white dark:text-black"><path d="M12 2v14"/><path d="M12 22v.01"/></svg>`;
 
-        // Updated Barcode Icon (Xinventory)
         const barcodeIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-white dark:text-black"><path d="M2 5h2v14H2zm4 0h1v14H6zm3 0h2v14H9zm4 0h3v14h-3zm5 0h1v14h-1zm3 0h1v14h-1z"/></svg>`;
 
-        // Updated Map Icon (XVIP)
         const mapIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white dark:text-black"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" x2="9" y1="3" y2="18"/><line x1="15" x2="15" y1="6" y2="21"/></svg>`;
 
-        // Updated AED Icon (Heart with Lightning Bolt)
         const aedIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white dark:text-black"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M13.5 7l-4 5h3l-1.5 5 5.5-6h-3l1.5-4z" fill="currentColor" stroke="none"/></svg>`;
+
+        const tvIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white dark:text-black"><rect width="20" height="15" x="2" y="7" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>`;
+
+        const num1Icon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-white dark:text-black"><text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-weight="900" font-size="22" fill="currentColor" stroke="none">1</text></svg>`;
+        const num2Icon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-white dark:text-black"><text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-weight="900" font-size="22" fill="currentColor" stroke="none">2</text></svg>`;
+        const num3Icon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-white dark:text-black"><text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-weight="900" font-size="22" fill="currentColor" stroke="none">3</text></svg>`;
+        const num4Icon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-white dark:text-black"><text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-weight="900" font-size="22" fill="currentColor" stroke="none">4</text></svg>`;
 
         // --- DATA ---
         const toolsData = [
@@ -304,7 +296,7 @@
             {
                 category: "Ordering",
                 items: [
-                    { name: "Staples Ordering", url: "https://v1.appx.comcast.net/storeordering/Orders/2912", icon: "file-text", desc: "Assorted office supplies" },
+                    { name: "Staples Ordering", url: "https://v1.appx.comcast.net/storeordering/Orders/2912", icon: "pencil", desc: "Assorted office supplies" },
                     { name: "Business Cards", url: "https://comcast.myonlineordering.com/login.aspx", icon: "users", desc: "Order standard business cards" },
                     { name: "Hub2U", url: "https://hub2uops.erpapps.comcast.com/hub2u", customIcon: hub2uIcon, desc: "Shipping goods, cables, pouches, bags" },
                     { name: "Rexi", url: "https://www.rexiresale.com/pages/enter-otp", icon: "smartphone", desc: "Like new Xfinity locked mobile devices" },
@@ -313,10 +305,10 @@
             {
                 category: "Audits",
                 items: [
-                    { name: "BA Self-Assessment Wk 1", url: "https://forms.office.com/Pages/ResponsePage.aspx?id=6e9qkKd2ZU-4LV7CB3XVqqLTyGG-D8lAibnvQ9JuSghUNklMMzU3NlRQQ0NTM09ERFlMQklHS1FSOS4u&origin=Invitation&channel=0", icon: "check-circle", desc: "Week 1 Assessment" },
-                    { name: "BA Self-Assessment Wk 2", url: "https://forms.office.com/Pages/ResponsePage.aspx?id=6e9qkKd2ZU-4LV7CB3XVqqLTyGG-D8lAibnvQ9JuSghUQ0dYSVo5VUpFTUFJWDBSUUhPNjlMV1JFQi4u&origin=Invitation&channel=0", icon: "check-circle", desc: "Week 2 Assessment" },
-                    { name: "BA Self-Assessment Wk 3", url: "https://forms.office.com/Pages/ResponsePage.aspx?id=6e9qkKd2ZU-4LV7CB3XVqqLTyGG-D8lAibnvQ9JuSghUODZGNkk3SFJNNTRSMjBEWkNWQlM4TDRUSC4u&origin=Invitation&channel=0", icon: "check-circle", desc: "Week 3 Assessment" },
-                    { name: "BA Self-Assessment Wk 4", url: "https://forms.office.com/Pages/ResponsePage.aspx?id=6e9qkKd2ZU-4LV7CB3XVqqLTyGG-D8lAibnvQ9JuSghUQkQxTE9KMzNES1BRQUw0TEJBTlVVMDdWWi4u&origin=Invitation&channel=0", icon: "check-circle", desc: "Week 4 Assessment" },
+                    { name: "BA Self-Assessment Wk 1", url: "https://forms.office.com/Pages/ResponsePage.aspx?id=6e9qkKd2ZU-4LV7CB3XVqqLTyGG-D8lAibnvQ9JuSghUNklMMzU3NlRQQ0NTM09ERFlMQklHS1FSOS4u&origin=Invitation&channel=0", customIcon: num1Icon, desc: "Week 1 Assessment" },
+                    { name: "BA Self-Assessment Wk 2", url: "https://forms.office.com/Pages/ResponsePage.aspx?id=6e9qkKd2ZU-4LV7CB3XVqqLTyGG-D8lAibnvQ9JuSghUQ0dYSVo5VUpFTUFJWDBSUUhPNjlMV1JFQi4u&origin=Invitation&channel=0", customIcon: num2Icon, desc: "Week 2 Assessment" },
+                    { name: "BA Self-Assessment Wk 3", url: "https://forms.office.com/Pages/ResponsePage.aspx?id=6e9qkKd2ZU-4LV7CB3XVqqLTyGG-D8lAibnvQ9JuSghUODZGNkk3SFJNNTRSMjBEWkNWQlM4TDRUSC4u&origin=Invitation&channel=0", customIcon: num3Icon, desc: "Week 3 Assessment" },
+                    { name: "BA Self-Assessment Wk 4", url: "https://forms.office.com/Pages/ResponsePage.aspx?id=6e9qkKd2ZU-4LV7CB3XVqqLTyGG-D8lAibnvQ9JuSghUQkQxTE9KMzNES1BRQUw0TEJBTlVVMDdWWi4u&origin=Invitation&channel=0", customIcon: num4Icon, desc: "Week 4 Assessment" },
                     { name: "Retail Road to Awesome", url: "https://www.jotform.com/app/252685641483162?utm_source=jotform_pwa", customIcon: roadIcon, desc: "Retail performance audit" },
                 ]
             },
@@ -335,7 +327,7 @@
                     { name: "Workday", url: "https://wd5.myworkday.com/comcast/d/home.htmld", icon: "briefcase", desc: "Input CA, SSIP, Check-ins, Trainings, CGP, Skills, and update personal details" },
                     { name: "Expense Reporting", url: "https://myexpense.comcast.com/login", icon: "wallet", desc: "Submit for travel and spend on P-card" },
                     { name: "NT Password Reset", url: "https://passwordreset.microsoftonline.com/", icon: "settings", desc: "Reset network credentials" },
-                    { name: "Facilities", url: "https://login.cbre.com/app/cbre_siefmprdcrscomcast_1/exkh21i9qcogQWDp04x7/sso/saml?SAMLRequest=PHNhbWxwOkF1dGhuUmVxdWVzdCBJRD0iX2I3MTRkN2E1LTVkNzYtNDJlMi04MWY1LTQ1ODliZjZmNzQ2MiIgVmVyc2lvbj0iMi4wIiBJc3N1ZUluc3RhbnQ9IjIwMjQtMDMtMDJUMjA6NDI6NDdaIiBQcm90b2NvbEJpbmRpbmc9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpiaW5kaW5nczpIVFRQLVBPU1QiIEFzc2VydGlvbkNvbnN1bWVyU2VydmljZVVSTD0iaHR0cHM6Ly9lbnRlcnByaXNlLnNlcnZpY2VpbnNpZ2h0LmNicmUuY29tL1BSRDIwMjQ5Q1JTIiB4bWxuczpzYW1scD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOnByb3RvY29sIj48c2FtbDpJc3N1ZXIgeG1sbnM6c2FtbD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOmFzc2VydGlvbiI%2baHR0cDovL3d3dy5va3RhLmNvbS9leGtoMjFpOXFjb2dRV0RwMDR4Nzwvc2FtbDpJc3N1ZXI%2bPHNhbWxwOk5hbWVJRFBvbGljeSBGb3JtYXQ9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpuYW1laWQtZm9ybWF0OnVuc3BlY2lmaWVkIiBBbGxvd0NyZWF0ZT0idHJ1ZSIgLz48c2FtbHA6UmVxdWVzdGVkQXV0aG5Db250ZXh0IENvbXBhcmlzb249ImV4YWN0Ij48c2FtbDpBdXRobkNvbnRleHRDbGFzc1JlZiB4bWxuczpzYW1sPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uIj51cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YWM6Y2xhc3NlczpQYXNzd29yZFByb3RlY3RlZFRyYW5zcG9ydDwvc2FtbDpBdXRobkNvbnRleHRDbGFzc1JlZj48L3NhbWxwOlJlcXVlc3RlZEF1dGhuQ29udGV4dD48L3NhbWxwOkF1dGhuUmVxdWVzdD4%3d", icon: "wrench", desc: "Tickets for facilities" },
+                    { name: "Facilities", url: "https://login.cbre.com/app/cbre_siefmprdcrscomcast_1/exkh21i9qcogQWDp04x7/sso/saml?SAMLRequest=PHNhbWxwOkF1dGhuUmVxdWVzdCBJRD0iX2I3MTRkN2E1LTVkNzYtNDJlMi04MWY1LTQ1ODliZjZmNzQ2MiIgVmVyc2lvbj0iMi4wIiBJc3N1ZUluc3RhbnQ9IjIwMjQtMDMtMDJUMjA6NDI6NDdaIiBQcm90b2NvbEJpbmRpbmc9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpiaW5kaW5nczpIVFRQLVBPU1QiIEFzc2VydGlvbkNvbnN1bWVyU2VydmljZVVSTD0iaHR0cHM6Ly9lbnRlcnByaXNlLnNlcnZpY2VpbnNpZ2h0LmNicmUuY29tL1BSRDIwMjQ5Q1JTIiB4bWxuczpzYW1scD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOnByb3RvY29sIj48c2FtbDpJc3N1ZXIgeG1sbnM6c2FtbD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOmFzc2VydGlvbiI%2baHR0cDovL3d3dy5va3RhLmNvbS9leGtoMjFpOXFjb2dRV0RwMDR4Nzwvc2FtbDpJc3N1ZXI%2bPHNhbWxwOk5hbWVJRFBvbGljeSBGb3JtYXQ9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpuYW1laWQtZm9ybWF0OnVuc3BlY2lmaWVkIiBBbGxvd0NyZWF0ZT0idHJ1ZSIgLz48c2FtbHA6UmVxdWVzdGVkQXV0aG5Db250ZXh0IENvbXBhcmlzb249ImV4YWN0Ij48c2FtbDpBdXRobkNvbnRleHRDbGFzc1JlZiB4bWxuczpzYW1sPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YWM6Y2xhc3NlczpQYXNzd29yZFByb3RlY3RlZFRyYW5zcG9ydDwvc2FtbDpBdXRobkNvbnRleHRDbGFzc1JlZj48L3NhbWxwOlJlcXVlc3RlZEF1dGhuQ29udGV4dD48L3NhbWxwOkF1dGhuUmVxdWVzdD4%3d", icon: "wrench", desc: "Tickets for facilities" },
                     { name: "REG", url: "https://celestial.cable.comcast.com/knowledge/frontline-effectiveness/retail-excellence-guide/", icon: "clipboard-check", desc: "Retail Excellence Guide" },
                     { name: "AED Check", url: "https://aedsuperstore.onlineoversight.com/site/login", customIcon: aedIcon, desc: "1st of each month" },
                     { name: "XM Escalations", url: "https://comcastcorp.sharepoint.com/:p:/t/NED-NER-RetailLeaders/ERW7J4MiQgRHhyc4WE4MJ2gBlgCqZUpZEv0xEw-X6oA6iA?e=cbBDor", customIcon: exclamationIcon, desc: "Guidebook: ECM pathways for XM" },
