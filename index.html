@@ -222,21 +222,66 @@
         // --- STATE MANAGEMENT ---
         let favorites = JSON.parse(localStorage.getItem('leaderHubFavorites')) || [];
 
+        // Custom SVGs for special requests
+        // Bad Debt: Increased font size from 20 to 28 for "larger" look
+        const badDebtIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 40 24" fill="none" class="text-white dark:text-black"><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-weight="900" font-size="28" fill="currentColor" stroke="none">-$</text></svg>`;
+        
+        const retail360Icon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 40 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white dark:text-black"><text x="2" y="18" font-family="sans-serif" font-weight="900" font-size="18" fill="currentColor" stroke="none" style="letter-spacing:-1px">360</text><path d="M2 20 Q 20 24 38 18" stroke="currentColor" stroke-width="2" fill="none" /></svg>`;
+
+        // Updated ECM Icon (Black/White dynamic)
+        const ecmIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 40 24" fill="none" class="text-white dark:text-black"><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-weight="900" font-size="20" fill="currentColor" stroke="none" style="letter-spacing:-1px">ecm</text></svg>`;
+
+        // Updated IQ Icon (Small i, Big Q)
+        const iqIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 32 24" fill="none" class="text-white dark:text-black"><text x="6" y="16" font-family="sans-serif" font-weight="bold" font-size="14" fill="currentColor" stroke="none">i</text><text x="11" y="18" font-family="sans-serif" font-weight="900" font-size="20" fill="currentColor" stroke="none">Q</text></svg>`;
+
+        // Updated Seasonal Icon (Snowflake only)
+        const seasonalIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white dark:text-black"><path d="M2 12h20"/><path d="M12 2v20"/><path d="m20 20-8-8-8 8"/><path d="m4 4 8 8 8-8"/></svg>`;
+
+        // Updated Xchange Icon (Extended bottom-right leg)
+        const xchangeIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-white dark:text-black"><path d="m18 6-12 12"/><path d="m6 6 16 16"/></svg>`;
+
+        // Updated Hub2U Icon (Text '2U')
+        const hub2uIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 40 24" fill="none" class="text-white dark:text-black"><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-weight="900" font-size="20" fill="currentColor" stroke="none" style="letter-spacing:-1px">2U</text></svg>`;
+
+        // Updated Celestial Icon (Storefront)
+        const celestialIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white dark:text-black"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2v0a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12v0a2 2 0 0 1-2-2V7"/></svg>`;
+
+        // Updated Road to Awesome Icon (Road with dotted line)
+        const roadIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white dark:text-black"><path d="M4 19 L8 5"/><path d="M20 19 L16 5"/><line x1="12" y1="5" x2="12" y2="19" stroke-dasharray="4 2"/></svg>`;
+
+        // Updated Key Icon (Simple Key)
+        const keyIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white dark:text-black"><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/><circle cx="7.5" cy="15.5" r="5.5"/></svg>`;
+
+        // Updated Test Tube Icon
+        const testTubeIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white dark:text-black"><path d="M14.5 2v17.5c0 1.4-1.1 2.5-2.5 2.5h0c-1.4 0-2.5-1.1-2.5-2.5V2"/><path d="M8.5 2h7"/><path d="M14.5 16h-5"/></svg>`;
+
+        // Updated Exclamation Point Icon (Bold)
+        const exclamationIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-white dark:text-black"><path d="M12 2v14"/><path d="M12 22v.01"/></svg>`;
+
+        // Updated Barcode Icon (Xinventory)
+        const barcodeIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-white dark:text-black"><path d="M2 5h2v14H2zm4 0h1v14H6zm3 0h2v14H9zm4 0h3v14h-3zm5 0h1v14h-1zm3 0h1v14h-1z"/></svg>`;
+
+        // Updated Map Icon (XVIP)
+        const mapIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white dark:text-black"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" x2="9" y1="3" y2="18"/><line x1="15" x2="15" y1="6" y2="21"/></svg>`;
+
+        // Updated AED Icon (Heart with Lightning Bolt)
+        const aedIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white dark:text-black"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M13.5 7l-4 5h3l-1.5 5 5.5-6h-3l1.5-4z" fill="currentColor" stroke="none"/></svg>`;
+
         // --- DATA ---
         const toolsData = [
             {
                 category: "Day to Day",
                 items: [
-                    { name: "ECM", url: "https://ecm.comcast.com/ecm", icon: "briefcase", desc: "Pathway to ticketing" },
-                    { name: "ABT", url: "https://abt.cable.comcast.com/", icon: "settings", desc: "New builds, modify existing address" },
-                    { name: "Cash Management", url: "https://rposportal.comcast.com/cash-drawer", icon: "bar-chart-3", desc: "Monthly Cash Audits, Cash Confirmation" },
-                    { name: "Bad Debt Tool", url: "https://baddebt.cable.comcast.com/default.aspx", icon: "shield", desc: "Remove debt lock on location" },
-                    { name: "Einstein", url: "https://einstein360.cable.comcast.com/einstein_nxtgen#Layout=1", icon: "search", desc: "Notes, billing, autopay, user profile, ITGs" },
-                    { name: "Retail 360", url: "https://retail360a.cable.comcast.com/login-nextgen#Layout=1", icon: "briefcase", desc: "Launch XM, disconnects, manage equipment" },
-                    { name: "Celestial", url: "https://celestial.cable.comcast.com/knowledge/?cb=1715089190584", icon: "users", desc: "Store Space/Queue, POS, apps, XM promotions" },
-                    { name: "IQ", url: "https://comcast.infoquest.tv/Account/Disclaimer", icon: "bar-chart-3", desc: "Commissions for team" },
-                    { name: "Xchange", url: "https://xchange3.performnet.com/?state=81d30384dc674c1b841d4f2f70277c95&code=bd48df34-b5ef-40ff-b72e-610ba405dd0c", icon: "file-text", desc: "Xchange points, huddles, active incentives" },
-                    { name: "Seasonal Enrollment", url: "https://inseasonal.cable.comcast.com/home", icon: "users", desc: "Manage seasonal program enrollments" },
+                    { name: "ECM", url: "https://ecm.comcast.com/ecm", customIcon: ecmIcon, desc: "Pathway to ticketing" },
+                    { name: "ABT", url: "https://abt.cable.comcast.com/", icon: "home", desc: "New builds, modify existing address" },
+                    { name: "Cash Management", url: "https://rposportal.comcast.com/cash-drawer", icon: "dollar-sign", desc: "Monthly Cash Audits, Cash Confirmation" },
+                    { name: "Bad Debt Tool", url: "https://baddebt.cable.comcast.com/default.aspx", customIcon: badDebtIcon, desc: "Remove debt lock on location" },
+                    { name: "Einstein", url: "https://einstein360.cable.comcast.com/einstein_nxtgen#Layout=1", icon: "brain", desc: "Notes, billing, autopay, user profile, ITGs" },
+                    { name: "Retail 360", url: "https://retail360a.cable.comcast.com/login-nextgen#Layout=1", customIcon: retail360Icon, desc: "Launch XM, disconnects, manage equipment" },
+                    { name: "Celestial", url: "https://celestial.cable.comcast.com/knowledge/?cb=1715089190584", customIcon: celestialIcon, desc: "Store Space/Queue, POS, apps, XM promotions" },
+                    { name: "IQ", url: "https://comcast.infoquest.tv/Account/Disclaimer", customIcon: iqIcon, desc: "Commissions for team" },
+                    { name: "Xchange", url: "https://xchange3.performnet.com/?state=81d30384dc674c1b841d4f2f70277c95&code=bd48df34-b5ef-40ff-b72e-610ba405dd0c", customIcon: xchangeIcon, desc: "Xchange points, huddles, active incentives" },
+                    { name: "Seasonal Enrollment", url: "https://inseasonal.cable.comcast.com/home", customIcon: seasonalIcon, desc: "Manage seasonal program enrollments" },
                     { name: "XOE", url: "https://xoe-portal.cws.xfinity.com/portal", icon: "briefcase", desc: "New connects processing" },
                 ]
             },
@@ -244,7 +289,7 @@
                 category: "New Hire",
                 items: [
                     { name: "Badge/Alarm", url: "https://nedtoc.cable.comcast.com/", icon: "shield", desc: "Alarm codes and badge requests" },
-                    { name: "My Comcast Access", url: "https://mycomcastaccess.comcast.com/identityiq/home.jsf", icon: "settings", desc: "IE, ECM, Medallia, Seasonal access" },
+                    { name: "My Comcast Access", url: "https://mycomcastaccess.comcast.com/identityiq/home.jsf", customIcon: keyIcon, desc: "IE, ECM, Medallia, Seasonal access" },
                     { name: "Tech Spot", url: "https://techspot.comcast.com/techspot", icon: "settings", desc: "Onboarding (CSG, XOE, CELESTIAL, SALES ID)" },
                     { name: "My Support", url: "https://mysupport.service-now.com/sp", icon: "settings", desc: "Tickets for access issues and tech issues" },
                     { name: "ID Lookup Tool", url: "https://idlookup.cable.comcast.com/#/", icon: "search", desc: "Lookup NT ID, OP ID, Sales ID" },
@@ -258,8 +303,8 @@
                 items: [
                     { name: "Staples Ordering", url: "https://v1.appx.comcast.net/storeordering/Orders/2912", icon: "file-text", desc: "Assorted office supplies" },
                     { name: "Business Cards", url: "https://comcast.myonlineordering.com/login.aspx", icon: "users", desc: "Order standard business cards" },
-                    { name: "Hub2U", url: "https://hub2uops.erpapps.comcast.com/hub2u", icon: "briefcase", desc: "Shipping goods, cables, pouches, bags" },
-                    { name: "Rexi", url: "https://www.rexiresale.com/pages/enter-otp", icon: "phone", desc: "Like new Xfinity locked mobile devices" },
+                    { name: "Hub2U", url: "https://hub2uops.erpapps.comcast.com/hub2u", customIcon: hub2uIcon, desc: "Shipping goods, cables, pouches, bags" },
+                    { name: "Rexi", url: "https://www.rexiresale.com/pages/enter-otp", icon: "smartphone", desc: "Like new Xfinity locked mobile devices" },
                 ]
             },
             {
@@ -269,14 +314,14 @@
                     { name: "BA Self-Assessment Wk 2", url: "https://forms.office.com/Pages/ResponsePage.aspx?id=6e9qkKd2ZU-4LV7CB3XVqqLTyGG-D8lAibnvQ9JuSghUQ0dYSVo5VUpFTUFJWDBSUUhPNjlMV1JFQi4u&origin=Invitation&channel=0", icon: "check-circle", desc: "Week 2 Assessment" },
                     { name: "BA Self-Assessment Wk 3", url: "https://forms.office.com/Pages/ResponsePage.aspx?id=6e9qkKd2ZU-4LV7CB3XVqqLTyGG-D8lAibnvQ9JuSghUODZGNkk3SFJNNTRSMjBEWkNWQlM4TDRUSC4u&origin=Invitation&channel=0", icon: "check-circle", desc: "Week 3 Assessment" },
                     { name: "BA Self-Assessment Wk 4", url: "https://forms.office.com/Pages/ResponsePage.aspx?id=6e9qkKd2ZU-4LV7CB3XVqqLTyGG-D8lAibnvQ9JuSghUQkQxTE9KMzNES1BRQUw0TEJBTlVVMDdWWi4u&origin=Invitation&channel=0", icon: "check-circle", desc: "Week 4 Assessment" },
-                    { name: "Retail Road to Awesome", url: "https://www.jotform.com/app/252685641483162?utm_source=jotform_pwa", icon: "bar-chart-3", desc: "Retail performance audit" },
+                    { name: "Retail Road to Awesome", url: "https://www.jotform.com/app/252685641483162?utm_source=jotform_pwa", customIcon: roadIcon, desc: "Retail performance audit" },
                 ]
             },
             {
                 category: "Training",
                 items: [
-                    { name: "Sales Lab", url: "https://comcastcorp.sharepoint.com/sites/cn-learninganddevelopment/SitePages/Sales-Lab.aspx?web=1", icon: "users", desc: "30 minute 1:1 (counts towards coaching)" },
-                    { name: "Sales Lab for Leaders", url: "https://apps.powerapps.com/play/e/115b9293-5645-e9ec-8d47-2bd945210012/a/ec7f9873-c628-46bf-864d-e5c76e9d834b?tenantId=906aefe9-76a7-4f65-b82d-5ec20775d5aa&sourcetime=1743112338240&source=portal&Hidenavbar=true", icon: "users", desc: "Leadership specific modules" },
+                    { name: "Sales Lab", url: "https://comcastcorp.sharepoint.com/sites/cn-learninganddevelopment/SitePages/Sales-Lab.aspx?web=1", customIcon: testTubeIcon, desc: "30 minute 1:1 (counts towards coaching)" },
+                    { name: "Sales Lab for Leaders", url: "https://apps.powerapps.com/play/e/115b9293-5645-e9ec-8d47-2bd945210012/a/ec7f9873-c628-46bf-864d-e5c76e9d834b?tenantId=906aefe9-76a7-4f65-b82d-5ec20775d5aa&sourcetime=1743112338240&source=portal&Hidenavbar=true", customIcon: testTubeIcon, desc: "Leadership specific modules" },
                     { name: "Thursday Manager Decks", url: "https://comcastcorp.sharepoint.com/teams/NED-NER-RetailLeaders/Shared%20Documents/Forms/AllItems.aspx?csf=1&web=1&e=g44zIT&ovuser=906aefe9%2D76a7%2D4f65%2Db82d%2D5ec20775d5aa%2Csfarer525%40cable%2Ecomcast%2Ecom&OR=Teams%2DHL&CT=1759266028368&clickparams=eyJBcHBOYW1lIjoiVGVhbXMtRGVza3RvcCIsIkFwcFZlcnNpb24iOiI0OS8yNTA4MjgxNzkxMiIsIkhhc0ZlZGVyYXRlZFVzZXIiOmZhbHNlfQ%3D%3D&CID=b3e9caa1%2D9023%2Da000%2D2677%2Dbff0cb2ccce0&cidOR=SPO&FolderCTID=0x0120008C4D267B38D0FE48848E737A6FC215D1&id=%2Fteams%2FNED%2DNER%2DRetailLeaders%2FShared%20Documents%2FGeneral%2FMeeting%20Decks", icon: "file-text", desc: "Meeting decks: in case you missed it" },
                     { name: "MyPerformance", url: "https://myperformance.comcast.net/performance/manager", icon: "bar-chart-3", desc: "Observations, huddles, coaching" },
                 ]
@@ -287,23 +332,23 @@
                     { name: "Workday", url: "https://wd5.myworkday.com/comcast/d/home.htmld", icon: "briefcase", desc: "Input CA, SSIP, Check-in, Trainings, and personal details" },
                     { name: "Expense Reporting", url: "https://myexpense.comcast.com/login", icon: "file-text", desc: "Submit for travel and spend on P-card" },
                     { name: "NT Password Reset", url: "https://passwordreset.microsoftonline.com/", icon: "settings", desc: "Reset network credentials" },
-                    { name: "Facilities", url: "https://login.cbre.com/app/cbre_siefmprdcrscomcast_1/exkh21i9qcogQWDp04x7/sso/saml?SAMLRequest=PHNhbWxwOkF1dGhuUmVxdWVzdCBJRD0iX2I3MTRkN2E1LTVkNzYtNDJlMi04MWY1LTQ1ODliZjZmNzQ2MiIgVmVyc2lvbj0iMi4wIiBJc3N1ZUluc3RhbnQ9IjIwMjQtMDMtMDJUMjA6NDI6NDdaIiBQcm90b2NvbEJpbmRpbmc9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpiaW5kaW5nczpIVFRQLVBPU1QiIEFzc2VydGlvbkNvbnN1bWVyU2VydmljZVVSTD0iaHR0cHM6Ly9lbnRlcnByaXNlLnNlcnZpY2VpbnNpZ2h0LmNicmUuY29tL1BSRDIwMjQ5Q1JTIiB4bWxuczpzYW1scD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOnByb3RvY29sIj48c2FtbDpJc3N1ZXIgeG1sbnM6c2FtbD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOmFzc2VydGlvbiI%2baHR0cDovL3d3dy5va3RhLmNvbS9leGtoMjFpOXFjb2dRV0RwMDR4Nzwvc2FtbDpJc3N1ZXI%2bPHNhbWxwOk5hbWVJRFBvbGljeSBGb3JtYXQ9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpuYW1laWQtZm9ybWF0OnVuc3BlY2lmaWVkIiBBbGxvd0NyZWF0ZT0idHJ1ZSIgLz48c2FtbHA6UmVxdWVzdGVkQXV0aG5Db250ZXh0IENvbXBhcmlzb249ImV4YWN0Ij48c2FtbDpBdXRobkNvbnRleHRDbGFzc1JlZiB4bWxuczpzYW1sPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uIj51cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YWM6Y2xhc3NlczpQYXNzd29yZFByb3RlY3RlZFRyYW5zcG9ydDwvc2FtbDpBdXRobkNvbnRleHRDbGFzc1JlZj48L3NhbWxwOlJlcXVlc3RlZEF1dGhuQ29udGV4dD48L3NhbWxwOkF1dGhuUmVxdWVzdD4%3d", icon: "briefcase", desc: "Tickets for facilities" },
+                    { name: "Facilities", url: "https://login.cbre.com/app/cbre_siefmprdcrscomcast_1/exkh21i9qcogQWDp04x7/sso/saml?SAMLRequest=PHNhbWxwOkF1dGhuUmVxdWVzdCBJRD0iX2I3MTRkN2E1LTVkNzYtNDJlMi04MWY1LTQ1ODliZjZmNzQ2MiIgVmVyc2lvbj0iMi4wIiBJc3N1ZUluc3RhbnQ9IjIwMjQtMDMtMDJUMjA6NDI6NDdaIiBQcm90b2NvbEJpbmRpbmc9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpiaW5kaW5nczpIVFRQLVBPU1QiIEFzc2VydGlvbkNvbnN1bWVyU2VydmljZVVSTD0iaHR0cHM6Ly9lbnRlcnByaXNlLnNlcnZpY2VpbnNpZ2h0LmNicmUuY29tL1BSRDIwMjQ5Q1JTIiB4bWxuczpzYW1scD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOnByb3RvY29sIj48c2FtbDpJc3N1ZXIgeG1sbnM6c2FtbD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOmFzc2VydGlvbiI%2baHR0cDovL3d3dy5va3RhLmNvbS9leGtoMjFpOXFjb2dRV0RwMDR4Nzwvc2FtbDpJc3N1ZXI%2bPHNhbWxwOk5hbWVJRFBvbGljeSBGb3JtYXQ9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpuYW1laWQtZm9ybWF0OnVuc3BlY2lmaWVkIiBBbGxvd0NyZWF0ZT0idHJ1ZSIgLz48c2FtbHA6UmVxdWVzdGVkQXV0aG5Db250ZXh0IENvbXBhcmlzb249ImV4YWN0Ij48c2FtbDpBdXRobkNvbnRleHRDbGFzc1JlZiB4bWxuczpzYW1sPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uIj51cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YWM6Y2xhc3NlczpQYXNzd29yZFByb3RlY3RlZFRyYW5zcG9ydDwvc2FtbDpBdXRobkNvbnRleHRDbGFzc1JlZj48L3NhbWxwOlJlcXVlc3RlZEF1dGhuQ29udGV4dD48L3NhbWxwOkF1dGhuUmVxdWVzdD4%3d", icon: "wrench", desc: "Tickets for facilities" },
                     { name: "REG", url: "https://celestial.cable.comcast.com/knowledge/frontline-effectiveness/retail-excellence-guide/", icon: "file-text", desc: "Retail Excellence Guide" },
-                    { name: "AED Check", url: "https://aedsuperstore.onlineoversight.com/site/login", icon: "check-circle", desc: "1st of each month" },
-                    { name: "XM Escalations", url: "https://comcastcorp.sharepoint.com/:p:/t/NED-NER-RetailLeaders/ERW7J4MiQgRHhyc4WE4MJ2gBlgCqZUpZEv0xEw-X6oA6iA?e=cbBDor", icon: "shield", desc: "Guidebook: ECM pathways for XM" },
+                    { name: "AED Check", url: "https://aedsuperstore.onlineoversight.com/site/login", customIcon: aedIcon, desc: "1st of each month" },
+                    { name: "XM Escalations", url: "https://comcastcorp.sharepoint.com/:p:/t/NED-NER-RetailLeaders/ERW7J4MiQgRHhyc4WE4MJ2gBlgCqZUpZEv0xEw-X6oA6iA?e=cbBDor", customIcon: exclamationIcon, desc: "Guidebook: ECM pathways for XM" },
                     { name: "EAS Templates", url: "https://comcastcorp.sharepoint.com/sites/hqeaseas/Shared%20Documents/Forms/AllItems.aspx?viewid=a09d39a0%2D7555%2D4a35%2Db692%2D172c9a77d638&CT=1761341481174&OR=OWA%2DNT%2DMail&CID=d08dbc09%2Dd97a%2Df730%2D2bad%2D883e20d862ab&FolderCTID=0x0120003E287DDDEAA0064D9F913A50BC15495A", icon: "file-text", desc: "Corrective actions, SSIP, RFT" },
                     { name: "XISCO", url: "https://xisco.comcast.net/home/menu", icon: "search", desc: "Trade in lookup by IMEI" },
-                    { name: "Kiosk", url: "https://comcast.convergentcare.com/cmcst/demoDashboard.jsp", icon: "bar-chart-3", desc: "End of day report for cash on kiosk" },
-                    { name: "Xinventory", url: "https://cceis.mintek.com/xInventory/dashboard", icon: "briefcase", desc: "Shipping and receiving, counts" },
-                    { name: "XVIP", url: "https://xvip.merchandising.cloud/store/locations", icon: "settings", desc: "Resets, ordering signage/tags/brochures" },
+                    { name: "Kiosk", url: "https://comcast.convergentcare.com/cmcst/demoDashboard.jsp", icon: "dollar-sign", desc: "End of day report for cash on kiosk" },
+                    { name: "Xinventory", url: "https://cceis.mintek.com/xInventory/dashboard", customIcon: barcodeIcon, desc: "Shipping and receiving, counts" },
+                    { name: "XVIP", url: "https://xvip.merchandising.cloud/store/locations", customIcon: mapIcon, desc: "Resets, ordering signage/tags/brochures" },
                 ]
             },
             {
                 category: "Customer Experience",
                 items: [
-                    { name: "tNPS - Medallia", url: "https://comcast.medallia.com/sso/comcast/samlRequest.do?goToUrl=https%3A%2F%2Fcomcast.medallia.com%2Fsso%2Fcomcast%2Fpages%2F878%3FroleId%3D91333%26f.question-score%3Dq_comcast_assisted_sms_ltr_scale11%26f.pfug_%255BCOMCAST_NATIONAL%255Dlocation%3D2842944%26f.timeperiod%3D100000022%26f.reporting-date%3De_responsedate%26alreftoken%3D%25226f72e04b0ed76f1d28911180c95fd26e%2522", icon: "bar-chart-3", desc: "Store scores, alerts, TTA, issue resolve" },
-                    { name: "DPP Credit Increase", url: "https://app.smartsheet.com/b/form/db2b1ee2d8424fbb950c13fd2c18d332", icon: "file-text", desc: "Increase DPP/lines after 6 months" },
-                    { name: "Incentive Tracker", url: "https://www.xfinityincentivetracker.com/track", icon: "bar-chart-3", desc: "Tracks gift cards" },
+                    { name: "tNPS - Medallia", url: "https://comcast.medallia.com/sso/comcast/samlRequest.do?goToUrl=https%3A%2F%2Fcomcast.medallia.com%2Fsso%2Fcomcast%2Fpages%2F878%3FroleId%3D91333%26f.question-score%3Dq_comcast_assisted_sms_ltr_scale11%26f.pfug_%255BCOMCAST_NATIONAL%255Dlocation%3D2842944%26f.timeperiod%3D100000022%26f.reporting-date%3De_responsedate%26alreftoken%3D%25226f72e04b0ed76f1d28911180c95fd26e%2522", icon: "smile", desc: "Store scores, alerts, TTA, issue resolve" },
+                    { name: "DPP Credit Increase", url: "https://app.smartsheet.com/b/form/db2b1ee2d8424fbb950c13fd2c18d332", icon: "dollar-sign", desc: "Increase DPP/lines after 6 months" },
+                    { name: "Incentive Tracker", url: "https://www.xfinityincentivetracker.com/track", icon: "credit-card", desc: "Tracks gift cards" },
                     { name: "Customer Feedback", url: "https://collect.iperceptions.com/?lID=1&rn=123531&pID=1&hs1=102214&hs2=91787&siteID=1&referrer=Link&sdfc=03b756c0-123531-0dcbb1db-cd59-44d5-8c25-4e78d3da0dac&source=91787&destination=commentcard&width=680&height=750&AspxAutoDetectCookieSupport=1", icon: "users", desc: "Used as exit interview for Cx" },
                     { name: "Channel Lineups", url: "https://xfinitylineup.brandsrv.com/resiwk/clurclookup.aspx", icon: "file-text", desc: "Print channel guides by city" },
                     { name: "Business Advantage", url: "https://login.microsoftonline.com/906aefe9-76a7-4f65-b82d-5ec20775d5aa/saml2?SAMLRequest=jZHNasMwEIRfxege23JkqgjboMQJBFIocdtDb6qyJQZLcrVyUvr0dRxyKv057rIzzDdboDJdL%2bQQjnYP7wNgiD5MZ7Ekg7fCKWxRWGUARdCikfc7kcWpMBDUQQVFom1dkg1nNedcyvmSsRVdcsbmd7lka57RtF6sSfQMHltnSzKKRw3iAFuLQdkwrtIsn1E6y%2fgj5YJSkefxgrOXy92DQmxPUJI31SGQSCKCD6PTylkcDPgG%2fKnV8LTfleQYQo8iSc7nc6yd0QrDa%2fvZgTrgZU6aETX5yYFcscXUx%2b%2fwvXfBadeRaOO8hqm7W8KqmOD8f0pUtyik%2biN6kVxdqyL5%2fq%2fqCw%3d%3d&sso_reload=true&sso_nonce=AwABEgEAAAADAOz_BQD0_6VzpLUgXpgkYFAL5zuW8sh3YGh3imn7FOxDNIcJyF3ivB5jynrVI8cmieB3-Ju_W5i7PKSYfVohEuJRN_omMBsgAA&client-request-id=7d163960-b644-4807-8619-96f847c05c91&mscrid=7d163960-b644-4807-8619-96f847c05c91", icon: "briefcase", desc: "Submit business leads" },
@@ -333,6 +378,13 @@
             const isFavorited = favorites.includes(item.name);
             const favIconClass = isFavorited ? "fill-yellow-400 text-yellow-400" : "text-slate-300 dark:text-slate-600 hover:text-yellow-400";
             
+            let iconHtml;
+            if (item.customIcon) {
+                iconHtml = item.customIcon;
+            } else {
+                iconHtml = `<i data-lucide="${item.icon}" class="w-5 h-5 text-white dark:text-black"></i>`;
+            }
+
             return `
             <div class="tool-card group relative flex flex-col p-4 rounded-xl bg-white dark:bg-slate-800 shadow-lg dark:shadow-none dark:border dark:border-slate-700">
                 <button onclick="toggleFavorite('${item.name}')" class="absolute top-3 right-3 p-1 z-10 transition-colors">
@@ -340,8 +392,8 @@
                 </button>
                 <a href="${item.url}" target="_blank" class="flex-grow flex flex-col">
                     <div class="flex items-start justify-between mb-3">
-                        <div class="p-2 bg-black dark:bg-white rounded-xl">
-                            <i data-lucide="${item.icon}" class="w-5 h-5 text-white dark:text-black"></i>
+                        <div class="p-2 bg-black dark:bg-white rounded-xl flex items-center justify-center">
+                            ${iconHtml}
                         </div>
                     </div>
                     <div>
