@@ -262,6 +262,8 @@
         const num3Icon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-white dark:text-black"><text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-weight="900" font-size="22" fill="currentColor" stroke="none">3</text></svg>`;
         const num4Icon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-white dark:text-black"><text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-weight="900" font-size="22" fill="currentColor" stroke="none">4</text></svg>`;
 
+        const crispPhoneIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-white dark:text-black"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`;
+
         // --- DATA ---
         const toolsData = [
             {
@@ -293,7 +295,7 @@
                     { name: "ID Lookup Tool", url: "https://idlookup.cable.comcast.com/#/", icon: "search", desc: "Lookup NT ID, OP ID, Sales ID" },
                     { name: "CET", url: "https://commissionsinquiryescalation.cable.comcast.com/#/home", icon: "users", desc: "New hires, LOA, Term Employee, commissions" },
                     { name: "ASK HRSS", url: "https://comcasthr.zendesk.com/hc/en-us", icon: "users", desc: "Assorted HR escalations, live chat" },
-                    { name: "Mobility Device", url: "https://techspot.comcast.com/techspot?id=ts_cat_item_guide_v3&table=sc_cat_item&sys_id=fd0d2bf71b0e2ad43604a718b04bcbe1", icon: "phone", desc: "Ordering for New hire mobile phones" },
+                    { name: "Mobility Device", url: "https://techspot.comcast.com/techspot?id=ts_cat_item_guide_v3&table=sc_cat_item&sys_id=fd0d2bf71b0e2ad43604a718b04bcbe1", customIcon: crispPhoneIcon, desc: "Ordering for New hire mobile phones" },
                     { name: "iPad Request", url: "https://techspot.comcast.com/techspot?id=ts_cat_item_guide_v3&table=sc_cat_item&sys_id=a842e22f1b9a1a5410faec64604bcb3a", icon: "tablet", desc: "Ordering for New hire iPads" },
                     { name: "Employee Handbook", url: "https://comcastcorp.sharepoint.com/sites/cn-hr/Shared%20Documents/Employee%20Handbook,%20Policies%20%26%20Guidelines/Employee_Handbook_Current.pdf", icon: "book", desc: "Policies & Guidelines" },
                 ]
@@ -336,7 +338,6 @@
                     { name: "Expense Reporting", url: "https://myexpense.comcast.com/login", icon: "wallet", desc: "Submit for travel and spend on P-card" },
                     { name: "NT Password Reset", url: "https://passwordreset.microsoftonline.com/", icon: "settings", desc: "Reset network credentials" },
                     { name: "Facilities", url: "https://login.cbre.com/app/cbre_siefmprdcrscomcast_1/exkh21i9qcogQWDp04x7/sso/saml?SAMLRequest=PHNhbWxwOkF1dGhuUmVxdWVzdCBJRD0iX2I3MTRkN2E1LTVkNzYtNDJlMi04MWY1LTQ1ODliZjZmNzQ2MiIgVmVyc2lvbj0iMi4wIiBJc3N1ZUluc3RhbnQ9IjIwMjQtMDMtMDJUMjA6NDI6NDdaIiBQcm90b2NvbEJpbmRpbmc9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpiaW5kaW5nczpIVFRQLVBPU1QiIEFzc2VydGlvbkNvbnN1bWVyU2VydmljZVVSTD0iaHR0cHM6Ly9lbnRlcnByaXNlLnNlcnZpY2VpbnNpZ2h0LmNicmUuY29tL1BSRDIwMjQ5Q1JTIiB4bWxuczpzYW1scD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOnByb3RvY29sIj48c2FtbDpJc3N1ZXIgeG1sbnM6c2FtbD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOmFzc2VydGlvbiI%2baHR0cDovL3d3dy5va3RhLmNvbS9leGtoMjFpOXFjb2dRV0RwMDR4Nzwvc2FtbDpJc3N1ZXI%2bPHNhbWxwOk5hbWVJRFBvbGljeSBGb3JtYXQ9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpuYW1laWQtZm9ybWF0OnVuc3BlY2lmaWVkIiBBbGxvd0NyZWF0ZT0idHJ1ZSIgLz48c2FtbHA6UmVxdWVzdGVkQXV0aG5Db250ZXh0IENvbXBhcmlzb249ImV4YWN0Ij48c2FtbDpBdXRobkNvbnRleHRDbGFzc1JlZiB4bWxuczpzYW1sPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YWM6Y2xhc3NlczpQYXNzd29yZFByb3RlY3RlZFRyYW5zcG9ydDwvc2FtbDpBdXRobkNvbnRleHRDbGFzc1JlZj48L3NhbWxwOlJlcXVlc3RlZEF1dGhuQ29udGV4dD48L3NhbWxwOkF1dGhuUmVxdWVzdD4%3d", icon: "wrench", desc: "Tickets for facilities" },
-                    { name: "REG", url: "https://celestial.cable.comcast.com/knowledge/frontline-effectiveness/retail-excellence-guide/", icon: "clipboard-check", desc: "Retail Excellence Guide" },
                     { name: "AED Check", url: "https://aedsuperstore.onlineoversight.com/site/login", customIcon: aedIcon, desc: "1st of each month" },
                     { name: "EAS | Northeast Division", url: "https://comcastcorp.sharepoint.com/:u:/r/sites/hqeaseas/SitePages/Northeast-Division(1).aspx?csf=1&web=1&e=0co1sW", icon: "life-buoy", desc: "Employee Advisory Services & Support" },
                     { name: "XISCO", url: "https://xisco.comcast.net/home/menu", icon: "search", desc: "Trade in lookup by IMEI" },
@@ -345,7 +346,7 @@
                     { name: "XVIP", url: "https://xvip.merchandising.cloud/store/locations", customIcon: mapIcon, desc: "Resets, ordering signage/tags/brochures" },
                     { name: "Get There", url: "https://wx1.getthere.net/DispatcherServlet?requestType=logininq&site=comcast", icon: "plane", desc: "travel/car/hotel" },
                     { name: "Drug/Alcohol Suspicion", url: "https://acrobat.adobe.com/id/urn:aaid:sc:VA6C2:6171cd03-db01-4601-a384-94be541ed725", icon: "alert-triangle", desc: "Reporting guidelines" },
-                    { name: "Porting Hub", url: "https://bailey-west.github.io/PortingAssistant/", icon: "phone-forwarded", desc: "Xfinity Porting Hub" },
+                    { name: "Porting Hub", url: "https://bailey-west.github.io/PortingAssistant/", customIcon: crispPhoneIcon, desc: "Xfinity Porting Hub" },
                 ]
             },
             {
@@ -361,6 +362,8 @@
                     { name: "JIRA", url: "https://npselevations.sys.comcast.net/secure/Dashboard.jspa?selectPageId=12001", icon: "alert-circle", desc: "NPS Elevations & Ticket Management" },
                     { name: "DPP Credit Increase", url: "https://app.smartsheet.com/b/form/db2b1ee2d8424fbb950c13fd2c18d332", icon: "dollar-sign", desc: "Increase DPP/lines after 6 months" },
                     { name: "XM Escalations", url: "https://comcastcorp.sharepoint.com/:p:/t/NED-NER-RetailLeaders/ERW7J4MiQgRHhyc4WE4MJ2gBlgCqZUpZEv0xEw-X6oA6iA?e=cbBDor", customIcon: exclamationIcon, desc: "Guidebook: ECM pathways for XM" },
+                    { name: "Cx Escalations Form", url: "https://app.smartsheet.com/b/form/6299c669e29547269c9638d157a14e2d", icon: "file-warning", desc: "Submit customer escalations" },
+                    { name: "BP Escalation Form", url: "https://app.smartsheet.com/b/form/1aad1246a91048b5923b9cd49e323dff", icon: "file-warning", desc: "Business Partner escalations" },
                 ]
             },
             {
