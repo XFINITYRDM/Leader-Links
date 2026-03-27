@@ -94,6 +94,9 @@
                         <button onclick="switchTab('directory')" id="nav-directory" class="text-base font-medium text-slate-500 dark:text-slate-400 hover:text-black dark:hover:text-white border-b-2 border-transparent px-1 py-1 transition-all">
                             Directory
                         </button>
+                        <button onclick="switchTab('holidays')" id="nav-holidays" class="text-base font-medium text-slate-500 dark:text-slate-400 hover:text-black dark:hover:text-white border-b-2 border-transparent px-1 py-1 transition-all">
+                            Holiday Hours
+                        </button>
                     </div>
                 </div>
                 
@@ -118,6 +121,7 @@
             <div class="px-4 pt-2 pb-6 space-y-2 flex flex-col">
                 <button onclick="switchTab('dashboard')" class="block px-3 py-3 rounded-lg text-lg font-bold text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-800 text-left">Tools Dashboard</button>
                 <button onclick="switchTab('directory')" class="block px-3 py-3 rounded-lg text-lg font-bold text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-800 text-left">Directory</button>
+                <button onclick="switchTab('holidays')" class="block px-3 py-3 rounded-lg text-lg font-bold text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-800 text-left">Holiday Hours</button>
             </div>
         </div>
     </header>
@@ -211,6 +215,112 @@
                 </div>
                 <div id="no-results" class="hidden px-6 py-12 text-center text-slate-500 dark:text-slate-400">
                     No results found.
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW: HOLIDAYS -->
+        <div id="view-holidays" class="hidden fade-in">
+            <div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div>
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-3">
+                        Holiday Hours
+                    </h1>
+                    <p class="text-lg text-slate-500 dark:text-slate-400">Store hours and closures for observed holidays (2026-2027).</p>
+                </div>
+            </div>
+
+            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl dark:shadow-none overflow-hidden">
+                <div class="min-w-full overflow-x-auto">
+                    <table class="min-w-full divide-y divide-slate-100 dark:divide-slate-700">
+                        <thead class="bg-slate-50 dark:bg-slate-800/50">
+                            <tr>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Date</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Holiday</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Hours / Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white dark:bg-slate-800 divide-y divide-slate-100 dark:divide-slate-700">
+                            <!-- MLK Day -->
+                            <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-white">Monday, January 19, 2026</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600 dark:text-slate-300">MLK Day</td>
+                                <td class="px-6 py-4 whitespace-nowrap"><span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-slate-200">BAU</span></td>
+                            </tr>
+                            <!-- Easter -->
+                            <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-white">Sunday, April 5, 2026</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600 dark:text-slate-300">Easter</td>
+                                <td class="px-6 py-4 whitespace-nowrap"><span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-slate-200">Closed</span></td>
+                            </tr>
+                            <!-- Memorial Day -->
+                            <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-white">Monday, May 25, 2026</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600 dark:text-slate-300">Memorial Day</td>
+                                <td class="px-6 py-4 whitespace-nowrap"><span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-slate-200">Close at 6</span></td>
+                            </tr>
+                            <!-- Juneteenth -->
+                            <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-white">Friday, June 19, 2026</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600 dark:text-slate-300">Juneteenth</td>
+                                <td class="px-6 py-4 whitespace-nowrap"><span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-slate-200">BAU</span></td>
+                            </tr>
+                            <!-- Independence Day -->
+                            <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-white">Saturday, July 4, 2026</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600 dark:text-slate-300">Independence Day</td>
+                                <td class="px-6 py-4 whitespace-nowrap"><span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-slate-200">Close at 6</span></td>
+                            </tr>
+                            <!-- Labor Day -->
+                            <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-white">Monday, September 7, 2026</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600 dark:text-slate-300">Labor Day</td>
+                                <td class="px-6 py-4 whitespace-nowrap"><span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-slate-200">BAU</span></td>
+                            </tr>
+                            <!-- Day Before Thanksgiving -->
+                            <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-white">Wednesday, November 25, 2026</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600 dark:text-slate-300">Day Before Thanksgiving</td>
+                                <td class="px-6 py-4 whitespace-nowrap"><span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-slate-200">BAU</span></td>
+                            </tr>
+                            <!-- Thanksgiving -->
+                            <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-white">Thursday, November 26, 2026</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600 dark:text-slate-300">Thanksgiving</td>
+                                <td class="px-6 py-4 whitespace-nowrap"><span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-slate-200">Closed</span></td>
+                            </tr>
+                            <!-- Black Friday -->
+                            <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-white">Friday, November 27, 2026</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600 dark:text-slate-300">Black Friday</td>
+                                <td class="px-6 py-4 whitespace-nowrap"><span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-slate-200">BAU</span></td>
+                            </tr>
+                            <!-- Xmas Eve -->
+                            <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-white">Thursday, December 24, 2026</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600 dark:text-slate-300">Xmas Eve</td>
+                                <td class="px-6 py-4 whitespace-nowrap"><span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-slate-200">Close at 5</span></td>
+                            </tr>
+                            <!-- Christmas -->
+                            <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-white">Friday, December 25, 2026</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600 dark:text-slate-300">Christmas</td>
+                                <td class="px-6 py-4 whitespace-nowrap"><span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-slate-200">Closed</span></td>
+                            </tr>
+                            <!-- New Years Eve -->
+                            <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-white">Thursday, December 31, 2026</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600 dark:text-slate-300">New Years Eve</td>
+                                <td class="px-6 py-4 whitespace-nowrap"><span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-slate-200">Close at 5</span></td>
+                            </tr>
+                            <!-- New Years Day -->
+                            <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-white">Friday, January 1, 2027</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600 dark:text-slate-300">New Years Day</td>
+                                <td class="px-6 py-4 whitespace-nowrap"><span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full bg-slate-100 dark:bg-slate-700 text-slate-800 dark:text-slate-200">11 - 7</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -403,6 +513,7 @@
             { id: 16, name: "Unicall (Incident Reporting)", role: "Claims/Incidents", dept: "Security", email: "-", phone: "(800) 864-2255" },
             { id: 17, name: "Shana Farer-Feld", role: "RDM", dept: "Retail Leadership", email: "-", phone: "(603) 759-3491" },
             { id: 18, name: "Kiosk Repair", role: "Hardware Support", dept: "Technical Ops", email: "-", phone: "(888) 772-1278" },
+            { id: 19, name: "Emergency Facilities", role: "Emergency Support", dept: "Facilities", email: "-", phone: "(888) 401-0304" },
         ];
 
         // --- RENDER FUNCTIONS ---
@@ -575,10 +686,7 @@
         }
 
         function switchTab(tabId) {
-            const dashboardView = document.getElementById('view-dashboard');
-            const directoryView = document.getElementById('view-directory');
-            const dashboardBtn = document.getElementById('nav-dashboard');
-            const directoryBtn = document.getElementById('nav-directory');
+            const views = ['dashboard', 'directory', 'holidays'];
             const mobileMenu = document.getElementById('mobile-menu');
             
             // Close mobile menu
@@ -587,30 +695,24 @@
             // Scroll top
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            if (tabId === 'dashboard') {
-                dashboardView.classList.remove('hidden');
-                directoryView.classList.add('hidden');
+            views.forEach(view => {
+                const viewEl = document.getElementById(`view-${view}`);
+                const btnEl = document.getElementById(`nav-${view}`);
                 
-                // Active Styling
-                dashboardBtn.classList.add('border-black', 'dark:border-white', 'text-black', 'dark:text-white');
-                dashboardBtn.classList.remove('border-transparent', 'text-slate-500', 'dark:text-slate-400');
-                
-                // Inactive Styling
-                directoryBtn.classList.remove('border-black', 'dark:border-white', 'text-black', 'dark:text-white');
-                directoryBtn.classList.add('border-transparent', 'text-slate-500', 'dark:text-slate-400');
-
-            } else {
-                dashboardView.classList.add('hidden');
-                directoryView.classList.remove('hidden');
-                
-                // Active Styling
-                directoryBtn.classList.add('border-black', 'dark:border-white', 'text-black', 'dark:text-white');
-                directoryBtn.classList.remove('border-transparent', 'text-slate-500', 'dark:text-slate-400');
-                
-                // Inactive Styling
-                dashboardBtn.classList.remove('border-black', 'dark:border-white', 'text-black', 'dark:text-white');
-                dashboardBtn.classList.add('border-transparent', 'text-slate-500', 'dark:text-slate-400');
-            }
+                if (view === tabId) {
+                    if (viewEl) viewEl.classList.remove('hidden');
+                    if (btnEl) {
+                        btnEl.classList.add('border-black', 'dark:border-white', 'text-black', 'dark:text-white');
+                        btnEl.classList.remove('border-transparent', 'text-slate-500', 'dark:text-slate-400');
+                    }
+                } else {
+                    if (viewEl) viewEl.classList.add('hidden');
+                    if (btnEl) {
+                        btnEl.classList.remove('border-black', 'dark:border-white', 'text-black', 'dark:text-white');
+                        btnEl.classList.add('border-transparent', 'text-slate-500', 'dark:text-slate-400');
+                    }
+                }
+            });
         }
 
         function toggleMobileMenu() {
