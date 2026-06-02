@@ -60,6 +60,7 @@
                         <button onclick="switchTab('dashboard')" id="nav-dashboard" class="text-base font-semibold border-b-2 border-black dark:border-white text-black dark:text-white px-1 py-1 transition-all">Tools</button>
                         <button onclick="switchTab('directory')" id="nav-directory" class="text-base font-medium text-slate-500 dark:text-slate-400 hover:text-black dark:hover:text-white border-b-2 border-transparent px-1 py-1 transition-all">Directory</button>
                         <button onclick="switchTab('holidays')" id="nav-holidays" class="text-base font-medium text-slate-500 dark:text-slate-400 hover:text-black dark:hover:text-white border-b-2 border-transparent px-1 py-1 transition-all">Holiday Hours</button>
+                        <button onclick="switchTab('joke')" id="nav-joke" class="text-base font-medium text-slate-500 dark:text-slate-400 hover:text-black dark:hover:text-white border-b-2 border-transparent px-1 py-1 transition-all">Joke of the Day</button>
                     </div>
                 </div>
                 
@@ -81,6 +82,7 @@
                 <button onclick="switchTab('dashboard')" class="block px-3 py-3 rounded-lg text-lg font-bold text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-800 text-left">Tools Dashboard</button>
                 <button onclick="switchTab('directory')" class="block px-3 py-3 rounded-lg text-lg font-bold text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-800 text-left">Directory</button>
                 <button onclick="switchTab('holidays')" class="block px-3 py-3 rounded-lg text-lg font-bold text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-800 text-left">Holiday Hours</button>
+                <button onclick="switchTab('joke')" class="block px-3 py-3 rounded-lg text-lg font-bold text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-800 text-left">Joke of the Day</button>
             </div>
         </div>
     </header>
@@ -210,6 +212,27 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-joke" class="hidden fade-in">
+            <div class="mb-10 flex flex-col items-center justify-center text-center">
+                <div class="p-4 bg-yellow-100 dark:bg-yellow-900/30 rounded-full mb-6">
+                    <i data-lucide="smile" class="w-12 h-12 text-yellow-600 dark:text-yellow-400"></i>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-6">Joke of the Day</h1>
+                
+                <div class="bg-white dark:bg-slate-800 p-8 md:p-12 rounded-3xl shadow-xl dark:shadow-none dark:border dark:border-slate-700 max-w-2xl w-full">
+                    <p id="joke-setup" class="text-xl md:text-2xl font-medium text-slate-800 dark:text-slate-200 mb-4"></p>
+                    <p id="joke-punchline" class="text-2xl md:text-3xl font-bold text-xfinity dark:text-xfinity-light hidden fade-in"></p>
+                    
+                    <button id="reveal-joke-btn" onclick="revealPunchline()" class="mt-8 px-6 py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-xl hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors">
+                        Reveal Punchline
+                    </button>
+                    <button id="next-joke-btn" onclick="fetchJoke()" class="hidden mt-8 px-6 py-3 bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white font-bold rounded-xl hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">
+                        Another Joke
+                    </button>
                 </div>
             </div>
         </div>
@@ -426,14 +449,8 @@
             lucide.createIcons();
         }
 
-        function toggleFavorite(name) {
-            favorites = favorites.includes(name) ? favorites.filter(f => f !== name) : [...favorites, name];
-            localStorage.setItem('leaderHubFavorites', JSON.stringify(favorites));
-            renderTools();
-        }
-
         function switchTab(tabId) {
-            ['dashboard', 'directory', 'holidays'].forEach(id => {
+            ['dashboard', 'directory', 'holidays', 'joke'].forEach(id => {
                 const el = document.getElementById(`view-${id}`);
                 const btn = document.getElementById(`nav-${id}`);
                 if (el) el.classList.toggle('hidden', id !== tabId);
@@ -444,6 +461,10 @@
             });
             document.getElementById('mobile-menu').classList.add('hidden');
             window.scrollTo({top:0, behavior:'smooth'});
+            
+            if(tabId === 'joke' && !currentJoke) {
+                fetchJoke();
+            }
         }
 
         function toggleTheme() {
@@ -508,6 +529,42 @@
         }
 
         function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
+
+        let currentJoke = null;
+
+        async function fetchJoke() {
+            const setupEl = document.getElementById('joke-setup');
+            const punchlineEl = document.getElementById('joke-punchline');
+            const revealBtn = document.getElementById('reveal-joke-btn');
+            const nextBtn = document.getElementById('next-joke-btn');
+
+            setupEl.textContent = "Loading joke...";
+            punchlineEl.classList.add('hidden');
+            revealBtn.classList.add('hidden');
+            nextBtn.classList.add('hidden');
+
+            try {
+                // Using JokeAPI with strict safe-mode and two-part formatting to ensure workplace-friendly jokes
+                const response = await fetch('https://v2.jokeapi.dev/joke/Any?safe-mode&type=twopart');
+                const data = await response.json();
+                currentJoke = data;
+                
+                setupEl.textContent = data.setup;
+                // JokeAPI uses 'delivery' instead of 'punchline'
+                punchlineEl.textContent = data.delivery; 
+                revealBtn.classList.remove('hidden');
+            } catch (error) {
+                setupEl.textContent = "Oops! Failed to load a joke. Try again later.";
+                nextBtn.classList.remove('hidden');
+                nextBtn.textContent = "Retry";
+            }
+        }
+
+        function revealPunchline() {
+            document.getElementById('joke-punchline').classList.remove('hidden');
+            document.getElementById('reveal-joke-btn').classList.add('hidden');
+            document.getElementById('next-joke-btn').classList.remove('hidden');
+        }
 
         window.onload = () => {
             renderTools();
