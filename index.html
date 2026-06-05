@@ -301,8 +301,7 @@
                     { name: "ASK HRSS", url: "https://comcasthr.zendesk.com/", icon: "users", desc: "HR escalations, live chat" },
                     { name: "Mobility Device", url: "https://techspot.comcast.com/", customIcon: crispPhoneIcon, desc: "Ordering mobile phones" },
                     { name: "iPad Request", url: "https://techspot.comcast.com/", icon: "tablet", desc: "Ordering tablets" },
-                    { name: "Employee Handbook", url: "https://comcastcorp.sharepoint.com/sites/cn-hr/Shared%20Documents/Employee%20Handbook,%20Policies%20%26%20Guidelines/Employee_Handbook_Current.pdf", icon: "book", desc: "Policies & Guidelines" },
-                    { name: "New Hire: Attendance", url: "https://comcastcorp-my.sharepoint.com/:w:/r/personal/sfarer525_cable_comcast_com/Documents/Documents/New%20Hire%20Attendance.docx?d=w43925072f4134e4998326a2eb7d5a1c7&csf=1&web=1&e=mMqPhO", icon: "calendar-clock", desc: "Attendance guidelines" }
+                    { name: "Employee Handbook", url: "https://comcastcorp.sharepoint.com/sites/cn-hr/Shared%20Documents/Employee%20Handbook,%20Policies%20%26%20Guidelines/Employee_Handbook_Current.pdf", icon: "book", desc: "Policies & Guidelines" }
                 ]
             },
             {
@@ -472,6 +471,16 @@
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
             document.getElementById('theme-icon').setAttribute('data-lucide', isDark ? 'sun' : 'moon');
             lucide.createIcons();
+        }
+
+        function toggleFavorite(toolName) {
+            if (favorites.includes(toolName)) {
+                favorites = favorites.filter(name => name !== toolName);
+            } else {
+                favorites.push(toolName);
+            }
+            localStorage.setItem('leaderHubFavorites', JSON.stringify(favorites));
+            renderTools();
         }
 
         function filterTools() {
